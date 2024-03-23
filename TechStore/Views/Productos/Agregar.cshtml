@@ -1,0 +1,83 @@
+@model TechStore.Models.Producto
+@{
+    ViewData["Title"] = "Producto";
+}
+<h1>Agregar Producto</h1>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        input[type="text"],
+        textarea,
+        input[type="number"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form id="productForm">
+        <h2>Agregar Producto</h2>
+        <label for="nombre">Nombre del Producto:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" required></textarea>
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" min="0" step="0.01" required>
+
+        <label for="igv">IGV (18%):</label>
+        <input type="text" id="igv" name="igv" readonly>
+
+        <input type="submit" value="Agregar Producto">
+    </form>
+
+    <script>
+        document.getElementById('precio').addEventListener('input', function() {
+            var precio = parseFloat(this.value);
+            if (!isNaN(precio)) {
+                var igv = precio * 0.18;
+                document.getElementById('igv').value = igv.toFixed(2);
+            }
+        });
+    </script>
+</body>
+</html>
